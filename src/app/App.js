@@ -52,7 +52,7 @@ export default class App {
   setNotes(notes, stats) {
     this.notes = notes;
 
-    // send notes for display
+    // send notes to display
 
     this.view.updateNotes(notes, stats);
   }
@@ -81,26 +81,14 @@ export default class App {
         this.refreshNotes();
       },
 
-      onNoteEdit: (id, title, body, category, dates) => {
-        NotesAPI.saveNote({
-          id,
-          title,
-          body,
-          category,
-          dates,
-        });
+      onNoteEdit: (note) => {
+        NotesAPI.saveNote(note);
 
         this.refreshNotes();
       },
 
       onNoteDelete: (id) => {
         NotesAPI.deleteNote(id);
-
-        this.refreshNotes();
-      },
-
-      onNoteArchive: (note) => {
-        NotesAPI.archiveNote(note);
 
         this.refreshNotes();
       },

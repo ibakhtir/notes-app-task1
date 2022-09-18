@@ -12,14 +12,12 @@ export default class NotesView {
     onNoteAdd,
     onNoteEdit,
     onNoteDelete,
-    onNoteArchive,
     onChangeTableView,
   }) {
     this.onNoteSelect = onNoteSelect;
     this.onNoteAdd = onNoteAdd;
     this.onNoteEdit = onNoteEdit;
     this.onNoteDelete = onNoteDelete;
-    this.onNoteArchive = onNoteArchive;
     this.onChangeTableView = onChangeTableView;
 
     this.activeNote = null;
@@ -52,7 +50,7 @@ export default class NotesView {
       this.modal.show();
     }
 
-    // open modal for edit app
+    // open modal for edit note
 
     if (target.closest(".list-table__edit")) {
       this.modal.show(this.activeNote);
@@ -69,12 +67,12 @@ export default class NotesView {
 
     if (target.closest(".list-table__archive")) {
       if (this.isActiveTable) {
-        this.onNoteArchive({
+        this.onNoteEdit({
           ...this.activeNote,
           isArchived: true,
         });
       } else {
-        this.onNoteArchive({
+        this.onNoteEdit({
           ...this.activeNote,
           isArchived: false,
         });
@@ -83,7 +81,7 @@ export default class NotesView {
       this.activeNote = null;
     }
 
-    // show archive instead of active notes
+    // show archive/active instead of active/archive notes
 
     if (target.closest(".notes__archive")) {
       this.isActiveTable = !this.isActiveTable;
@@ -122,13 +120,14 @@ export default class NotesView {
 
       if (!this.errors) {
         if (this.activeNote) {
-          this.onNoteEdit(
-            this.activeNote.id,
-            titleValue,
-            bodyValue,
-            categoryValue,
-            dates
-          );
+          this.onNoteEdit({
+            id: this.activeNote.id,
+            title: titleValue,
+            body: bodyValue,
+            category: categoryValue,
+            dates,
+            isArchived: this.activeNote.isArchived,
+          });
         } else {
           this.onNoteAdd(titleValue, bodyValue, categoryValue, dates);
         }
@@ -146,7 +145,7 @@ export default class NotesView {
   }
 
   updateNotes(notes, stats) {
-    // send data for display notes
+    // send data to display notes
 
     const notesList = document.querySelector(".list-table__body");
     notesList.innerHTML = "";
@@ -156,7 +155,7 @@ export default class NotesView {
       notesList.append(noteItemHTML);
     });
 
-    // send data for display statistics
+    // send data to display statistics
 
     const totalList = document.querySelector(".total-table__body");
     totalList.innerHTML = "";
@@ -171,7 +170,7 @@ export default class NotesView {
     });
   }
 
-  // methods for display
+  // display methods
 
   createNotesHTML(note) {
     const { id, title, body, category, createdAt, dates } = note;

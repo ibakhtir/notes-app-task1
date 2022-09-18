@@ -32,16 +32,9 @@ export default class NotesAPI {
       existNote.body = note.body;
       existNote.category = note.category;
       existNote.dates = note.dates;
+      existNote.isArchived = note.isArchived;
     } else {
       NotesAPI.notes.unshift(note);
-    }
-  }
-
-  static archiveNote(note) {
-    const existNote = NotesAPI.notes.find((n) => n.id === note.id);
-
-    if (existNote) {
-      existNote.isArchived = note.isArchived;
     }
   }
 
