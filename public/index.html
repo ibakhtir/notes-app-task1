@@ -7,6 +7,44 @@
     <title>Notes</title>
   </head>
   <body>
-    <h1>Hello World</h1>
+    <div class="container">
+      <div class="notes">
+        <section class="notes__block">
+          <div class="notes__table-wrapper">
+            <table class="notes__table list-table">
+              <thead class="list-table__header">
+                <tr class="list-table__header-sticky">
+                  <th>Name</th>
+                  <th>Content</th>
+                  <th>Category</th>
+                  <th>Created</th>
+                  <th>Dates</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody class="list-table__body"></tbody>
+            </table>
+          </div>
+          <div class="notes__actions">
+            <button type="button" class="notes__archive">Archive</button>
+            <button type="button" class="notes__add">Create</button>
+          </div>
+        </section>
+        <section class="notes__block">
+          <div class="notes__table-wrapper">
+            <table class="notes__table total-table">
+              <thead class="total-table__header">
+                <tr class="total-table__header-sticky">
+                  <th>Category</th>
+                  <th>Active</th>
+                  <th>Archived</th>
+                </tr>
+              </thead>
+              <tbody class="total-table__body"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
   </body>
 </html>
