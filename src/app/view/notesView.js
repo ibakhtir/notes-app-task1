@@ -141,6 +141,7 @@ export default class NotesView {
 
     if (target.closest(".form__cancel")) {
       this.modal.hide();
+      this.activeNote = null;
     }
   }
 
